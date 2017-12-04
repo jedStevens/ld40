@@ -1,0 +1,33 @@
+[gd_resource type="Theme" load_steps=5 format=2]
+
+[ext_resource path="res://characters/gold_panel.tres" type="StyleBox" id=1]
+[ext_resource path="res://ui/gold_panel.tres" type="StyleBox" id=2]
+[ext_resource path="res://src/fonts/gomarice_kaiju_monster.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+
+size = 32
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 3 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[resource]
+
+Dialogs/constants/button_margin = 32
+Dialogs/constants/margin = 8
+Panel/styles/panel = ExtResource( 1 )
+Panel/styles/panelf = ExtResource( 1 )
+Panel/styles/panelnc = ExtResource( 2 )
+PopupPanel/styles/panel = ExtResource( 2 )
+WindowDialog/colors/title_color = Color( 1, 1, 1, 1 )
+WindowDialog/constants/close_h_ofs = 18
+WindowDialog/constants/close_v_ofs = 18
+WindowDialog/constants/scaleborder_size = 4
+WindowDialog/constants/title_height = 33
+WindowDialog/fonts/title_font = SubResource( 1 )
+WindowDialog/icons/close = null
+WindowDialog/icons/close_highlight = null
+WindowDialog/styles/panel = ExtResource( 2 )
+_sections_unfolded = [ "Dialogs", "Panel", "PopupPanel", "WindowDialog" ]
+

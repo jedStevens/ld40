@@ -1,0 +1,14 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/2_Kicker.ogg-11896279bbc7266005faf0caa65c5cb9.oggstr"
+
+[deps]
+
+source_md5="fb2e9fcdc69a34f9441a576614fc2261"
+
+[params]
+
+loop=true
+loop_offset=0
