@@ -5,7 +5,6 @@ var delay = 0.6
 
 func on_start():
 	timer = delay
-	ai_obj.hp = randf()*10+15
 
 func exec_ai(delta):
 	ai_obj.velocity = Vector3()

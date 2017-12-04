@@ -6,6 +6,8 @@ var players = []
 
 var party_buttons = ["tog_1", "tog_2", "tog_3", "tog_4"]
 
+var ability_actions = ["ab_Q", "ab_W", "ab_E"]
+
 var halted = false
 
 var hp_panel = null
@@ -36,6 +38,14 @@ func _process(delta):
 				continue
 			if Input.is_action_just_pressed(party_buttons[i]):
 				players[i].set_selected(not players[i].is_selected())
+		
+		for aa in ability_actions:
+			if Input.is_action_just_pressed(aa):
+				for p in players:
+					if p == null:
+						continue
+					if p.selected:
+						p.use_ability(ability_actions.find(aa))
 
 func is_any_selected():
 	var b = false

@@ -7,17 +7,21 @@ var speed = 10
 var p = null
 var dest = null
 
+var damage = 10
+
 func _ready():
 	set_physics_process(true)
 	p = $Particles
 	dest = get_parent()
 	print("particles", p)
+	direction = global_transform.basis.xform(direction)
 
 func _physics_process(delta):
 	var col = move_and_collide(direction.normalized() * speed * delta)
 	
 	if col != null:
-		print("particle_col ",col.collider.get_name())
+		if col.collider.is_in_group("enemy"):
+			col.collider.damage(damage)
 		
 		call_deferred("kill_self")
 

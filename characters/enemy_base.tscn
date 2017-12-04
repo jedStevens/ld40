@@ -263,4 +263,8 @@ stretch_margin_right = 4
 stretch_margin_bottom = 4
 _sections_unfolded = [ "Textures" ]
 
+[node name="items" type="Spatial" parent="."]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.46484, 0 )
+
 

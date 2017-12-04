@@ -102,6 +102,22 @@ func _physics_process(delta):
 	else:
 		velocity *= 0.75
 		set_sleeping(true)
+	
+	if $items.get_child_count() > 0:
+		var gap = 2 * PI / $items.get_child_count()
+		var a = 0
+		for c in $items.get_children():
+			
+			c.transform.origin = Vector3(sin(a), 0, cos(a))
+			a+=gap
+		$items.global_transform.basis = $items.global_transform.rotated(Vector3(0,1,0),delta).basis
+	
+
+func pick_up_item(i):
+	i.get_parent().remove_child(i)
+	$items.add_child(i)
+	i.set_mode(RigidBody.MODE_KINEMATIC)
+	i.held = true
 
 func set_selected(b):
 	if (selected and not b) or (not selected and b):
@@ -153,3 +169,9 @@ func get_portrait():
 func on_off_screen():
 	omc.kick(self)
 	set_party(false)
+
+func use_ability(i):
+	if $abilities.get_child_count() <= i:
+		print("man I wish I could use my ability: ", i)
+	else:
+		$abilities.get_child(i).activate()

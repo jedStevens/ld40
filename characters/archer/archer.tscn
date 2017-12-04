@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://characters/base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/archer/portrait.png" type="Texture" id=2]
 [ext_resource path="res://characters/archer/hat.tscn" type="PackedScene" id=3]
 [ext_resource path="res://characters/circle.png" type="Texture" id=4]
+[ext_resource path="res://characters/archer/single_arrow.gd" type="Script" id=5]
 
 [sub_resource type="SpatialMaterial" id=1]
 
@@ -127,5 +128,17 @@ transform = Transform( 0.230212, 0, 3.55271e-15, 0, 0.230212, 0, -2.66454e-15, 0
 [node name="marker" parent="."]
 
 material/0 = SubResource( 2 )
+
+[node name="single_arrow" type="Node" parent="abilities"]
+
+script = ExtResource( 5 )
+cooldown_time = 3.0
+mana_cost = 12
+icon = null
+player = NodePath("../..")
+
+[node name="new_arrow_pos" type="Position3D" parent="."]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16875, 1.40861 )
 
 

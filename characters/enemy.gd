@@ -22,7 +22,7 @@ export(Texture) var portrait_texture = null
 var onair_time = 0
 var on_floor = false
 
-var hp = 24
+var hp = 15
 
 export(NodePath) var arm_wheel = null
 
@@ -50,6 +50,31 @@ func _physics_process(delta):
 	
 	$hp/bar.value = hp
 	
+	if $items.get_child_count() > 0:
+		var gap = 2 * PI / $items.get_child_count()
+		var a = 0
+		for c in $items.get_children():
+			
+			c.transform.origin = Vector3(sin(a), 0, cos(a))
+			a+=gap
+		$items.global_transform.basis = $items.global_transform.rotated(Vector3(0,1,0),delta).basis
+	
+	if hp <= 0:
+		call_deferred("kill_self")
+func pick_up_item(i):
+	i.get_parent().remove_child(i)
+	$items.add_child(i)
+	i.set_mode(RigidBody.MODE_KINEMATIC)
+	i.held = true
+func kill_self():
+	for c in $items.get_children():
+		var t = c.global_transform
+		$items.remove_child(c)
+		get_parent().add_child(c)
+		c.global_transform = t
+		c.set_mode(RigidBody.MODE_RIGID)
+		c.held = false
+	queue_free()
 
 func ai_move(to_move, delta):
 	velocity = velocity.linear_interpolate(to_move.normalized() * speed,delta * reactiveness)
@@ -87,3 +112,6 @@ func set_sleeping(b):
 		
 func get_portrait():
 	return portrait_texture
+
+func damage(d):
+	hp -= d
