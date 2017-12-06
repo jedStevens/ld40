@@ -12,6 +12,7 @@ extents = Vector3( 0.437332, 0.041512, 0.206869 )
 radius = 1.0
 
 [node name="key" type="RigidBody" groups=[
+"key",
 "item",
 ]]
 
@@ -29,13 +30,14 @@ continuous_cd = false
 contacts_reported = 0
 contact_monitor = false
 sleeping = false
-can_sleep = true
+can_sleep = false
 axis_lock = 0
 linear_velocity = Vector3( 0, 0, 0 )
 linear_damp = -1.0
 angular_velocity = Vector3( 0, 0, 0 )
 angular_damp = -1.0
 script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Linear" ]
 
 [node name="Scene Root" parent="." instance=ExtResource( 2 )]
 

@@ -45,6 +45,10 @@ ab_W=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","
 ab_E=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
  ]
 
+[physics]
+
+3d/physics_engine="GodotPhysics"
+
 [rendering]
 
 environment/default_environment="res://demo_env.tres"

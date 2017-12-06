@@ -8,13 +8,17 @@ export(bool) var selected = false
 var in_party = false
 
 var velocity = Vector3()
+var additional_vel = Vector3()
 
 export(NodePath) var cam_rig = "../rig"
 
 export(float) var speed = 10
 
 export(float) var turn_rate = 6
-export(float) var reactiveness = 12
+export(float) var reactiveness = 60
+
+export(float) var mana_regen_rate = 1
+export(float) var hp_regen_rate = 1
 
 export(bool) var sleeping = false setget set_sleeping
 
@@ -31,6 +35,11 @@ var on_floor = false
 
 export(NodePath) var arm_wheel = null
 
+var mana = 100
+var hp = 100
+
+var ui = null
+
 func _ready():
 	set_physics_process(true)
 	$marker.visible = selected
@@ -40,7 +49,14 @@ func _ready():
 	$party_up.connect("body_entered", self, "_on_party_up_body_entered")
 
 func _physics_process(delta):
-	velocity = move_and_slide(velocity, Vector3(0,1,0))
+	velocity = move_and_slide(velocity + additional_vel, Vector3(0,1,0))
+	additional_vel *= 0.5
+	
+	mana += delta * mana_regen_rate
+	hp += delta * hp_regen_rate
+	if ui != null:
+		ui.set_hp(hp)
+		ui.set_alt(mana)
 	
 	if is_on_floor():
 		onair_time = 0
@@ -74,6 +90,7 @@ func _physics_process(delta):
 		
 		
 		velocity = velocity.linear_interpolate(to_move.normalized() * speed,delta * reactiveness)
+		velocity += Vector3(0,-700,0) * delta
 		
 		if velocity.length() > 0:
 			var hvel = Vector3(velocity.x, 0, velocity.z)
@@ -172,6 +189,30 @@ func on_off_screen():
 
 func use_ability(i):
 	if $abilities.get_child_count() <= i:
-		print("man I wish I could use my ability: ", i)
+		print("man, I wish I could use my ability: ", i)
 	else:
-		$abilities.get_child(i).activate()
+		var a = $abilities.get_child(i)
+		if a.mana_cost > mana or not a.off_cd():
+			return
+		else:
+			$abilities.get_child(i).activate()
+			mana -= a.mana_cost
+
+func has_item(tag):
+	for c in $items.get_children():
+		if c.is_in_group(tag):
+			return true
+
+func get_item(tag):
+	for c in $items.get_children():
+		if c.is_in_group(tag):
+			return c
+
+func channel(time, o, f):
+	var t = Timer.new()
+	t.autostart = true
+	t.wait_time = time
+	t.one_shot = true
+	t.connect("timeout", o,f)
+	halt()
+	add_child(t) 

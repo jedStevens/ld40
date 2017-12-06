@@ -1,10 +1,15 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://characters/base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/archer/portrait.png" type="Texture" id=2]
 [ext_resource path="res://characters/archer/hat.tscn" type="PackedScene" id=3]
 [ext_resource path="res://characters/circle.png" type="Texture" id=4]
 [ext_resource path="res://characters/archer/single_arrow.gd" type="Script" id=5]
+[ext_resource path="res://stash/Icon.1_82.png" type="Texture" id=6]
+[ext_resource path="res://characters/archer/dash.gd" type="Script" id=7]
+[ext_resource path="res://stash/Icon.4_81.png" type="Texture" id=8]
+[ext_resource path="res://characters/archer/trap.gd" type="Script" id=9]
+[ext_resource path="res://stash/Icon.5_98.png" type="Texture" id=10]
 
 [sub_resource type="SpatialMaterial" id=1]
 
@@ -16,6 +21,7 @@ flags_no_depth_test = false
 flags_use_point_size = false
 flags_world_triplanar = false
 flags_fixed_size = false
+flags_albedo_tex_force_srgb = false
 vertex_color_use_as_albedo = false
 vertex_color_is_srgb = false
 params_diffuse_mode = 1
@@ -67,6 +73,7 @@ flags_no_depth_test = false
 flags_use_point_size = false
 flags_world_triplanar = false
 flags_fixed_size = false
+flags_albedo_tex_force_srgb = false
 vertex_color_use_as_albedo = false
 vertex_color_is_srgb = false
 params_diffuse_mode = 1
@@ -111,6 +118,9 @@ _sections_unfolded = [ "Albedo", "Flags" ]
 
 [node name="player" instance=ExtResource( 1 )]
 
+reactiveness = 60
+mana_regen_rate = 1
+hp_regen_rate = 1
 portrait_texture = ExtResource( 2 )
 
 [node name="Scene Root" parent="char/head" instance=ExtResource( 3 )]
@@ -134,7 +144,23 @@ material/0 = SubResource( 2 )
 script = ExtResource( 5 )
 cooldown_time = 3.0
 mana_cost = 12
-icon = null
+icon = ExtResource( 6 )
+player = NodePath("../..")
+
+[node name="dash" type="Node" parent="abilities"]
+
+script = ExtResource( 7 )
+cooldown_time = 10.0
+mana_cost = 30
+icon = ExtResource( 8 )
+player = NodePath("../..")
+
+[node name="trap" type="Node" parent="abilities"]
+
+script = ExtResource( 9 )
+cooldown_time = 20.0
+mana_cost = 25
+icon = ExtResource( 10 )
 player = NodePath("../..")
 
 [node name="new_arrow_pos" type="Position3D" parent="."]

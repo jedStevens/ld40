@@ -74,6 +74,7 @@ func party_up(p):
 		rig.get_node("sfx/join").play()
 	
 func kick(p):
+	p.ui = null
 	var i = players.find(p)
 	if i == -1:
 		return
@@ -81,7 +82,7 @@ func kick(p):
 	p.set_party(false)
 	
 	if hp_panel!= null:
-		hp_panel.get_child(i).clear_portrait()
+		hp_panel.get_child(i).clear()
 	
 	if rig != null:
 		rig.get_node("sfx/leave").play()

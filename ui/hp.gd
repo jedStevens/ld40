@@ -8,4 +8,4 @@ func _process(delta):
 	margin_right = get_viewport_rect().size.x
 
 func player_set_at(player, pos):
-	get_child(pos).set_portrait(player.get_portrait())
+	get_child(pos).set_player(player)

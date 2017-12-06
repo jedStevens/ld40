@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://characters/enemies/ai_fsm.gd" type="Script" id=1]
+[ext_resource path="res://characters/npc_base/ai_fsm.gd" type="Script" id=1]
+
 
 [node name="ai_fsm" type="Node"]
 

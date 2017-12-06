@@ -13,13 +13,12 @@ func _ready():
 	set_physics_process(true)
 	p = $Particles
 	dest = get_parent()
-	print("particles", p)
 	direction = global_transform.basis.xform(direction)
 
 func _physics_process(delta):
 	var col = move_and_collide(direction.normalized() * speed * delta)
 	
-	if col != null:
+	if col != null and not col.collider.is_in_group("player"):
 		if col.collider.is_in_group("enemy"):
 			col.collider.damage(damage)
 		

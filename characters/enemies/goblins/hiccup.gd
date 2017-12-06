@@ -1,4 +1,4 @@
-extends "res://characters/enemies/ai_node.gd"
+extends "res://characters/npc_base/ai_node.gd"
 
 var timer = 0
 var delay = 0.6

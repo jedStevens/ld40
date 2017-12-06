@@ -1,4 +1,4 @@
-extends "res://characters/enemies/ai_node.gd"
+extends "res://characters/npc_base/ai_node.gd"
 
 func exec_ai(delta):
 	if ai_obj != null:

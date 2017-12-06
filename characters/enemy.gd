@@ -63,16 +63,17 @@ func _physics_process(delta):
 		call_deferred("kill_self")
 func pick_up_item(i):
 	i.get_parent().remove_child(i)
-	$items.add_child(i)
+	$items.call_deferred("add_child", i)
 	i.set_mode(RigidBody.MODE_KINEMATIC)
 	i.held = true
 func kill_self():
 	for c in $items.get_children():
 		var t = c.global_transform
 		$items.remove_child(c)
-		get_parent().add_child(c)
+		get_parent().call_deferred("add_child", c)
 		c.global_transform = t
 		c.set_mode(RigidBody.MODE_RIGID)
+		c.set_sleeping(false)
 		c.held = false
 	queue_free()
 

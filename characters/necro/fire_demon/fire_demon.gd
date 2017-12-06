@@ -1,0 +1,1 @@
+extends "res://characters/npc_base/ai_unit.gd"

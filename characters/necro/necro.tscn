@@ -1,10 +1,16 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://characters/base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/necro/portrait.png" type="Texture" id=2]
 [ext_resource path="res://characters/mage/beard.tscn" type="PackedScene" id=3]
 [ext_resource path="res://characters/necro/hood.tscn" type="PackedScene" id=4]
 [ext_resource path="res://characters/circle.png" type="Texture" id=5]
+[ext_resource path="res://characters/necro/fire_demon.gd" type="Script" id=6]
+[ext_resource path="res://stash/fire_summon.png" type="Texture" id=7]
+[ext_resource path="res://characters/necro/ice_demon.gd" type="Script" id=8]
+[ext_resource path="res://stash/ice_summon.png" type="Texture" id=9]
+[ext_resource path="res://characters/necro/resurrect.gd" type="Script" id=10]
+[ext_resource path="res://stash/ressurect.png" type="Texture" id=11]
 
 [sub_resource type="SpatialMaterial" id=1]
 
@@ -16,6 +22,7 @@ flags_no_depth_test = false
 flags_use_point_size = false
 flags_world_triplanar = false
 flags_fixed_size = false
+flags_albedo_tex_force_srgb = false
 vertex_color_use_as_albedo = false
 vertex_color_is_srgb = false
 params_diffuse_mode = 1
@@ -67,6 +74,7 @@ flags_no_depth_test = false
 flags_use_point_size = false
 flags_world_triplanar = false
 flags_fixed_size = false
+flags_albedo_tex_force_srgb = false
 vertex_color_use_as_albedo = false
 vertex_color_is_srgb = false
 params_diffuse_mode = 1
@@ -114,6 +122,8 @@ _sections_unfolded = [ "Albedo", "Flags" ]
 speed = 7.0
 turn_rate = 2.0
 reactiveness = 2.0
+mana_regen_rate = 3.0
+hp_regen_rate = 1
 portrait_texture = ExtResource( 2 )
 
 [node name="head" parent="char"]
@@ -135,5 +145,30 @@ material/0 = SubResource( 1 )
 [node name="marker" parent="."]
 
 material/0 = SubResource( 2 )
+
+[node name="fire_demon" type="Node" parent="abilities"]
+
+script = ExtResource( 6 )
+cooldown_time = 10.0
+mana_cost = 25
+icon = ExtResource( 7 )
+player = NodePath("../..")
+channel_time = 2.0
+
+[node name="ice_demon" type="Node" parent="abilities"]
+
+script = ExtResource( 8 )
+cooldown_time = 3.0
+mana_cost = 12
+icon = ExtResource( 9 )
+player = null
+
+[node name="resurrect" type="Node" parent="abilities"]
+
+script = ExtResource( 10 )
+cooldown_time = 3.0
+mana_cost = 12
+icon = ExtResource( 11 )
+player = NodePath("../..")
 
 
