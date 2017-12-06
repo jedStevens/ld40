@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://characters/necro/fire_demon/fire_demon.gd" type="Script" id=1]
 [ext_resource path="res://characters/necro/fire_demon/fire_demon_skin.tres" type="Material" id=2]
 [ext_resource path="res://characters/eyes.tres" type="Material" id=3]
 [ext_resource path="res://ui/basic_unit_hp.tscn" type="PackedScene" id=4]
+[ext_resource path="res://characters/npc_base/ai_fsm.tscn" type="PackedScene" id=5]
+[ext_resource path="res://characters/necro/fire_demon/run_and_die.gd" type="Script" id=6]
 
 [sub_resource type="ArrayMesh" id=1]
 
@@ -58,6 +60,24 @@ custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 radius = 0.285864
 height = 0.825352
 
+[sub_resource type="Animation" id=5]
+
+resource_name = "death"
+length = 0.5
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("char:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.276094, 0.276094, 0.276094 ), Vector3( 0.0161072, 0.0161072, 0.0161072 ) ]
+}
+
 [node name="fire_demon" type="KinematicBody"]
 
 input_ray_pickable = true
@@ -75,6 +95,7 @@ arm_wheel = null
 
 [node name="char" type="Spatial" parent="."]
 
+editor/display_folded = true
 transform = Transform( 0.276094, 0, 0, 0, 0.276094, 0, 0, 0, 0.276094, 0, 0, 0 )
 
 [node name="body" type="Spatial" parent="char"]
@@ -148,5 +169,29 @@ _sections_unfolded = [ "Transform" ]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.96403, 0 )
 
 [node name="hp" parent="." instance=ExtResource( 4 )]
+
+[node name="items" type="Spatial" parent="."]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.724132, 0 )
+
+[node name="ai_fsm" parent="." instance=ExtResource( 5 )]
+
+current_state = "run_and_die"
+
+[node name="run_and_die" type="Node" parent="ai_fsm"]
+
+script = ExtResource( 6 )
+lifetime = 5.0
+
+[node name="anim" type="AnimationPlayer" parent="."]
+
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+root_node = NodePath("..")
+anims/death = SubResource( 5 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
 
 

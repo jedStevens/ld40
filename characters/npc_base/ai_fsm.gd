@@ -9,6 +9,8 @@ func _ready():
 	
 	for c in get_children():
 		c.set_fsm(self)
+	
+	set_state(current_state)
 
 func set_state(new_state):
 	current_state = new_state

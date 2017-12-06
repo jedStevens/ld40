@@ -1,12 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://characters/enemy.gd" type="Script" id=1]
 [ext_resource path="res://characters/walk_wheel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://characters/circle.png" type="Texture" id=3]
 [ext_resource path="res://sfx/1_select.ogg" type="AudioStream" id=4]
 [ext_resource path="res://sfx/2_deselect.ogg" type="AudioStream" id=5]
-[ext_resource path="res://ui/ui_panel.png" type="Texture" id=6]
-[ext_resource path="res://ui/enemy_hp.png" type="Texture" id=7]
+[ext_resource path="res://ui/basic_unit_hp.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CylinderMesh" id=1]
 
@@ -43,6 +42,7 @@ flags_no_depth_test = false
 flags_use_point_size = false
 flags_world_triplanar = false
 flags_fixed_size = false
+flags_albedo_tex_force_srgb = false
 vertex_color_use_as_albedo = false
 vertex_color_is_srgb = false
 params_diffuse_mode = 1
@@ -142,6 +142,8 @@ skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform", "material" ]
 
+[node name="sleeping" type="Spatial" parent="char/head"]
+
 [node name="walk_wheel" parent="char" instance=ExtResource( 2 )]
 
 transform = Transform( 0.230212, 0, 5.32907e-15, 0, 0.230212, 0, -4.44089e-15, 0, 0.230212, -0.442044, 0.969338, 1.93224e-08 )
@@ -217,51 +219,7 @@ doppler_tracking = 0
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85999, 0.257771 )
 
-[node name="hp" type="Control" parent="."]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Hint", "Rect", "Size Flags" ]
-
-[node name="bar" type="TextureProgress" parent="hp"]
-
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -78.0
-margin_top = -17.0
-margin_right = 78.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-size_flags_horizontal = 1
-size_flags_vertical = 1
-min_value = 0.0
-max_value = 100.0
-step = 1.0
-page = 0.0
-value = 14.157
-exp_edit = false
-rounded = false
-texture_under = ExtResource( 6 )
-texture_over = null
-texture_progress = ExtResource( 7 )
-radial_fill_degrees = 360.0
-radial_center_offset = Vector2( 0, 0 )
-nine_patch_stretch = true
-stretch_margin_left = 4
-stretch_margin_top = 4
-stretch_margin_right = 4
-stretch_margin_bottom = 4
-_sections_unfolded = [ "Textures" ]
+[node name="hp" parent="." instance=ExtResource( 6 )]
 
 [node name="items" type="Spatial" parent="."]
 

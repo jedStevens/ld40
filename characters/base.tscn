@@ -34,6 +34,7 @@ flags_no_depth_test = false
 flags_use_point_size = false
 flags_world_triplanar = false
 flags_fixed_size = false
+flags_albedo_tex_force_srgb = false
 vertex_color_use_as_albedo = false
 vertex_color_is_srgb = false
 params_diffuse_mode = 1
@@ -95,7 +96,9 @@ selected = false
 cam_rig = "../rig"
 speed = 10
 turn_rate = 6
-reactiveness = 12
+reactiveness = 60
+mana_regen_rate = 1
+hp_regen_rate = 1
 sleeping = false
 group = 0
 portrait_texture = ExtResource( 2 )
@@ -110,6 +113,10 @@ _sections_unfolded = [ "Transform" ]
 
 transform = Transform( 0.5, 0, 3.55271e-15, 0, 0.5, 0, -3.55271e-15, 0, 0.5, -0.469163, 4.37164, 2.05078e-08 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="sleeping" type="Spatial" parent="char/head"]
+
+transform = Transform( 1, 0, 3.55271e-15, 0, 1, 0, -3.55271e-15, 0, 1, 0, -0.490788, 0 )
 
 [node name="body" type="MeshInstance" parent="char"]
 
