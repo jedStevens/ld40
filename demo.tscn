@@ -439,7 +439,7 @@ transform = Transform( 0.0226315, 0, 0.999744, 0, 1, 0, -0.999744, 0, 0.0226315,
 
 [node name="mage" parent="." instance=ExtResource( 7 )]
 
-transform = Transform( 0.210683, 0, 0.977555, 0, 1, 0, -0.977555, 0, 0.210683, -3.20707, -0.0079031, -44.4329 )
+transform = Transform( 0.210683, 0, 0.977555, 0, 1, 0, -0.977555, 0, 0.210683, -3.52436, -0.0079031, -45.0512 )
 
 [node name="necro" parent="." instance=ExtResource( 8 )]
 
@@ -508,6 +508,9 @@ _sections_unfolded = [ "Geometry", "Transform", "material" ]
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 root_node = NodePath("..")
+autoplay = "auto"
+speed_scale = 1.0
+active = true
 anims/auto = SubResource( 11 )
 playback/active = true
 playback/speed = 1.0
@@ -805,6 +808,7 @@ mode = 3
 
 [node name="haggard_goblin3" parent="." instance=ExtResource( 21 )]
 
+editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.817811, 0, -32.98 )
 
 [node name="char" parent="haggard_goblin3"]
